@@ -4,19 +4,25 @@ import java.time.LocalDateTime;
 
 import org.springframework.http.HttpStatus;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
+@Schema(name = "Error Response", description = "Schema to Hold error response information")
 public class ErrorResponseDto {
 
+	@Schema(description = "Api path invoked by client")
 	private String apiPath;
 
-	private HttpStatus errorCod;
+	@Schema(description = "Error code representing the error happend")
+	private HttpStatus errorCode;
 
+	@Schema(description = "Error message representing the error happend")
 	private String errorMessage;
 
+	@Schema(description = "Time representing when the error happened")
 	private LocalDateTime errorTime;
 
 	public String getApiPath() {
@@ -27,12 +33,12 @@ public class ErrorResponseDto {
 		this.apiPath = apiPath;
 	}
 
-	public HttpStatus getErrorCod() {
-		return errorCod;
+	public HttpStatus getErrorCode() {
+		return errorCode;
 	}
 
-	public void setErrorCod(HttpStatus errorCod) {
-		this.errorCod = errorCod;
+	public void setErrorCode(HttpStatus errorCode) {
+		this.errorCode = errorCode;
 	}
 
 	public String getErrorMessage() {
@@ -59,14 +65,14 @@ public class ErrorResponseDto {
 	public ErrorResponseDto(String apiPath, HttpStatus errorCod, String errorMessage, LocalDateTime errorTime) {
 		super();
 		this.apiPath = apiPath;
-		this.errorCod = errorCod;
+		this.errorCode = errorCod;
 		this.errorMessage = errorMessage;
 		this.errorTime = errorTime;
 	}
 
 	@Override
 	public String toString() {
-		return "ErrorResponseDto [apiPath=" + apiPath + ", errorCod=" + errorCod + ", errorMessage=" + errorMessage
+		return "ErrorResponseDto [apiPath=" + apiPath + ", errorCod=" + errorCode + ", errorMessage=" + errorMessage
 				+ ", errorTime=" + errorTime + "]";
 	}
 

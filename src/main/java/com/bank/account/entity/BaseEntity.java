@@ -1,9 +1,16 @@
 package com.bank.account.entity;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import org.springframework.boot.actuate.audit.listener.AuditListener;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,18 +20,23 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@EntityListeners(AuditingEntityListener.class)
 public class BaseEntity {
 
 	@Column(updatable = false)
+	@CreatedDate
 	public LocalDateTime createAt;
 
 	@Column(updatable = false)
+	@CreatedBy
 	public String createdBy;
 
 	@Column(insertable = false)
+	@LastModifiedDate
 	public LocalDateTime updateAt;
 
 	@Column(insertable = false)
+	@LastModifiedBy
 	public String updateBy;
 
 	public LocalDateTime getCreateAt() {
